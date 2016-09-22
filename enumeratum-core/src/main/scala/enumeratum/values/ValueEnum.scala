@@ -4,7 +4,7 @@ import enumeratum.{ EnumMacros, ValueEnumMacros }
 
 import scala.language.experimental.macros
 
-sealed trait ValueEnum[ValueType, EntryType <: ValueEnumEntry[ValueType]] {
+trait ValueEnum[ValueType, EntryType <: ValueEnumEntry[ValueType]] {
 
   /**
    * Map of [[ValueType]] to [[EntryType]] members
@@ -118,6 +118,52 @@ trait ShortEnum[A <: ShortEnumEntry] extends ValueEnum[Short, A] {
    * if you aren't using this method...why are you even bothering with this lib?
    */
   final protected def findValues: IndexedSeq[A] = macro ValueEnumMacros.findShortValueEntriesImpl[A]
+}
+
+object ByteEnum {
+
+  /**
+    * Materializes a ByteEnum for an inscope ByteEnumEntry
+    */
+  implicit def materialiseShortValueEnum[EntryType <: ShortEnumEntry]: ByteEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+
+}
+
+/**
+  * Value enum with [[ByteEnumEntry]] entries
+  */
+trait ByteEnum[A <: ByteEnumEntry] extends ValueEnum[Byte, A] {
+
+  /**
+    * Method that returns a Seq of [[A]] objects that the macro was able to find.
+    *
+    * You will want to use this in some way to implement your [[values]] method. In fact,
+    * if you aren't using this method...why are you even bothering with this lib?
+    */
+  final protected def findValues: IndexedSeq[A] = macro ValueEnumMacros.findByteValueEntriesImpl[A]
+}
+
+object BooleanEnum {
+
+  /**
+    * Materializes a BooleanEnum for an inscope BooleanEnumEntry
+    */
+  implicit def materialiseShortValueEnum[EntryType <: ShortEnumEntry]: BooleanEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+
+}
+
+/**
+  * Value enum with [[BooleanEnumEntry]] entries
+  */
+trait BooleanEnum[A <: BooleanEnumEntry] extends ValueEnum[Boolean, A] {
+
+  /**
+    * Method that returns a Seq of [[A]] objects that the macro was able to find.
+    *
+    * You will want to use this in some way to implement your [[values]] method. In fact,
+    * if you aren't using this method...why are you even bothering with this lib?
+    */
+  final protected def findValues: IndexedSeq[A] = macro ValueEnumMacros.findBooleanValueEntriesImpl[A]
 }
 
 object StringEnum {

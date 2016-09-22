@@ -6,7 +6,7 @@ package enumeratum.values
  * Copyright 2016
  */
 
-sealed trait ValueEnumEntry[ValueType] {
+trait ValueEnumEntry[ValueType] {
 
   /**
    * Value of this entry
@@ -53,6 +53,16 @@ abstract class LongEnumEntry extends ValueEnumEntry[Long]
  * Value Enum Entry parent class for [[Short]] valued entries
  */
 abstract class ShortEnumEntry extends ValueEnumEntry[Short]
+
+/**
+  * Value Enum Entry parent class for [[Byte]] valued entries
+  */
+abstract class ByteEnumEntry extends ValueEnumEntry[Byte]
+
+/**
+  * Value Enum Entry parent class for [[Boolean]] valued entries
+  */
+abstract class BooleanEnumEntry extends ValueEnumEntry[Boolean]
 
 /**
  * Value Enum Entry parent class for [[String]] valued entries

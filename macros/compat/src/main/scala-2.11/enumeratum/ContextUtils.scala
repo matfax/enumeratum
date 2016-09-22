@@ -7,6 +7,8 @@ object ContextUtils {
   // Constant types
   type CTLong = Long
   type CTInt = Int
+  type CTByte = Byte
+  type CTBoolean = Boolean
 
   /**
    * Returns a TermName

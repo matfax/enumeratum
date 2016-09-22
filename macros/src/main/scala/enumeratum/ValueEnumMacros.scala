@@ -37,6 +37,30 @@ object ValueEnumMacros {
   }
 
   /**
+    * Finds ValueEntryType-typed objects in scope that have literal value:Short implementations
+    *
+    * Note
+    *
+    *  - requires the ValueEntryType to have a 'value' member that has a literal value
+    *  - the Short value should be a literal Int (do no need to cast .toShort).
+    */
+  def findByteValueEntriesImpl[ValueEntryType: c.WeakTypeTag](c: Context): c.Expr[IndexedSeq[ValueEntryType]] = {
+    findValueEntriesImpl[ValueEntryType, ContextUtils.CTByte, Byte](c)(_.toByte) // do a transform because there is no such thing as Short literals
+  }
+
+  /**
+    * Finds ValueEntryType-typed objects in scope that have literal value:Short implementations
+    *
+    * Note
+    *
+    *  - requires the ValueEntryType to have a 'value' member that has a literal value
+    *  - the Short value should be a literal Int (do no need to cast .toShort).
+    */
+  def findBooleanValueEntriesImpl[ValueEntryType: c.WeakTypeTag](c: Context): c.Expr[IndexedSeq[ValueEntryType]] = {
+    findValueEntriesImpl[ValueEntryType, ContextUtils.CTBoolean, Boolean](c)(identity)
+  }
+
+  /**
    * Finds ValueEntryType-typed objects in scope that have literal value:String implementations
    *
    * Note
