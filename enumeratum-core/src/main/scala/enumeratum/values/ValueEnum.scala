@@ -4,7 +4,7 @@ import enumeratum.{ EnumMacros, ValueEnumMacros }
 
 import scala.language.experimental.macros
 
-trait ValueEnum[V, E <: ValueEnumEntry[V]] {
+trait ValueEnum[V, +E <: ValueEnumEntry[V]] {
 
   /**
    * Map of [[V]] to [[E]] members
