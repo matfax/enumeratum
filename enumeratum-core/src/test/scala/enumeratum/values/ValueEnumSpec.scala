@@ -29,37 +29,39 @@ class ValueEnumSpec extends FunSpec with Matchers with ValueEnumHelpers {
   testNumericEnum("IntEnum that is nested inside a LongEnum", Animal.Mammalian)
   testNumericEnum("Custom IntEnum with private constructors", CustomEnumPrivateConstructor)
 
+  /*
   describe("finding companion object") {
 
     it("should work for IntEnums") {
-      def findCompanion[EntryType <: IntEnumEntry: IntEnum](entry: EntryType) = implicitly[IntEnum[EntryType]]
+      def findCompanion[E <: IntEnumEntry: IntEnum](entry: E) = implicitly[IntEnum[E]]
       val companion = findCompanion(LibraryItem.Magazine: LibraryItem)
       companion shouldBe LibraryItem
       companion.values should contain(LibraryItem.Magazine)
     }
 
     it("should work for ShortEnum") {
-      def findCompanion[EntryType <: ShortEnumEntry: ShortEnum](entry: EntryType) = implicitly[ShortEnum[EntryType]]
+      def findCompanion[E <: ShortEnumEntry: ShortEnum](entry: E) = implicitly[ShortEnum[E]]
       val companion = findCompanion(Drinks.Beer: Drinks)
       companion shouldBe Drinks
       companion.values should contain(Drinks.Cola)
     }
 
     it("should work for LongEnum") {
-      def findCompanion[EntryType <: LongEnumEntry: LongEnum](entry: EntryType) = implicitly[LongEnum[EntryType]]
+      def findCompanion[E <: LongEnumEntry: LongEnum](entry: E) = implicitly[LongEnum[E]]
       val companion = findCompanion(ContentType.Image: ContentType)
       companion shouldBe ContentType
       companion.values should contain(ContentType.Audio)
     }
 
     it("should work for StringEnum") {
-      def findCompanion[EntryType <: StringEnumEntry: StringEnum](entry: EntryType) = implicitly[StringEnum[EntryType]]
+      def findCompanion[E <: StringEnumEntry: StringEnum](entry: E) = implicitly[StringEnum[E]]
       val companion = findCompanion(OperatingSystem.Android: OperatingSystem)
       companion shouldBe OperatingSystem
       companion.values should contain(OperatingSystem.Windows)
     }
 
   }
+  */
 
   describe("compilation failures") {
 

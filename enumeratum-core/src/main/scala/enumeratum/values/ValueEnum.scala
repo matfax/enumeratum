@@ -56,13 +56,13 @@ object IntEnum {
   /**
    * Materializes an IntEnum for a given IntEnumEntry
    */
-  implicit def materialiseIntValueEnum[EntryType <: IntEnumEntry]: IntEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+  implicit def materialiseIntValueEnum[E <: IntEnumEntry]: IntEnum[E] = macro EnumMacros.materializeEnumImpl[E]
 
 }
 /**
  * Value enum with [[IntEnumEntry]] entries
  */
-trait IntEnum[A <: IntEnumEntry] extends ValueEnum[Int, A] {
+trait IntEnum[+A <: IntEnumEntry] extends ValueEnum[Int, A] {
 
   /**
    * Method that returns a Seq of [[A]] objects that the macro was able to find.
@@ -70,7 +70,7 @@ trait IntEnum[A <: IntEnumEntry] extends ValueEnum[Int, A] {
    * You will want to use this in some way to implement your [[values]] method. In fact,
    * if you aren't using this method...why are you even bothering with this lib?
    */
-  protected def findValues: IndexedSeq[A] = macro ValueEnumMacros.findIntValueEntriesImpl[A]
+  protected def findValues[B >: A]: IndexedSeq[B] = macro ValueEnumMacros.findIntValueEntriesImpl[B]
 
 }
 
@@ -79,14 +79,14 @@ object LongEnum {
   /**
    * Materializes a LongEnum for an scope LongEnumEntry
    */
-  implicit def materialiseLongValueEnum[EntryType <: LongEnumEntry]: LongEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+  implicit def materialiseLongValueEnum[E <: LongEnumEntry]: LongEnum[E] = macro EnumMacros.materializeEnumImpl[E]
 
 }
 
 /**
  * Value enum with [[LongEnumEntry]] entries
  */
-trait LongEnum[A <: LongEnumEntry] extends ValueEnum[Long, A] {
+trait LongEnum[+A <: LongEnumEntry] extends ValueEnum[Long, A] {
 
   /**
    * Method that returns a Seq of [[A]] objects that the macro was able to find.
@@ -102,14 +102,14 @@ object ShortEnum {
   /**
    * Materializes a ShortEnum for an inscope ShortEnumEntry
    */
-  implicit def materialiseShortValueEnum[EntryType <: ShortEnumEntry]: ShortEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+  implicit def materialiseShortValueEnum[E <: ShortEnumEntry]: ShortEnum[E] = macro EnumMacros.materializeEnumImpl[E]
 
 }
 
 /**
  * Value enum with [[ShortEnumEntry]] entries
  */
-trait ShortEnum[A <: ShortEnumEntry] extends ValueEnum[Short, A] {
+trait ShortEnum[+A <: ShortEnumEntry] extends ValueEnum[Short, A] {
 
   /**
    * Method that returns a Seq of [[A]] objects that the macro was able to find.
@@ -125,14 +125,14 @@ object ByteEnum {
   /**
     * Materializes a ByteEnum for an inscope ByteEnumEntry
     */
-  implicit def materialiseShortValueEnum[EntryType <: ShortEnumEntry]: ByteEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+  implicit def materialiseShortValueEnum[E <: ShortEnumEntry]: ByteEnum[E] = macro EnumMacros.materializeEnumImpl[E]
 
 }
 
 /**
   * Value enum with [[ByteEnumEntry]] entries
   */
-trait ByteEnum[A <: ByteEnumEntry] extends ValueEnum[Byte, A] {
+trait ByteEnum[+A <: ByteEnumEntry] extends ValueEnum[Byte, A] {
 
   /**
     * Method that returns a Seq of [[A]] objects that the macro was able to find.
@@ -148,14 +148,14 @@ object BooleanEnum {
   /**
     * Materializes a BooleanEnum for an inscope BooleanEnumEntry
     */
-  implicit def materialiseShortValueEnum[EntryType <: ShortEnumEntry]: BooleanEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+  implicit def materialiseShortValueEnum[E <: ShortEnumEntry]: BooleanEnum[E] = macro EnumMacros.materializeEnumImpl[E]
 
 }
 
 /**
   * Value enum with [[BooleanEnumEntry]] entries
   */
-trait BooleanEnum[A <: BooleanEnumEntry] extends ValueEnum[Boolean, A] {
+trait BooleanEnum[+A <: BooleanEnumEntry] extends ValueEnum[Boolean, A] {
 
   /**
     * Method that returns a Seq of [[A]] objects that the macro was able to find.
@@ -171,7 +171,7 @@ object StringEnum {
   /**
    * Materializes a StringEnum for an in-scope StringEnumEntry
    */
-  implicit def materialiseStringValueEnum[EntryType <: StringEnumEntry]: StringEnum[EntryType] = macro EnumMacros.materializeEnumImpl[EntryType]
+  implicit def materialiseStringValueEnum[E <: StringEnumEntry]: StringEnum[E] = macro EnumMacros.materializeEnumImpl[E]
 
 }
 
@@ -183,7 +183,7 @@ object StringEnum {
  *
  * Note that uniqueness is only guaranteed if you do not do any runtime string manipulation on values.
  */
-trait StringEnum[A <: StringEnumEntry] extends ValueEnum[String, A] {
+trait StringEnum[+A <: StringEnumEntry] extends ValueEnum[String, A] {
 
   /**
    * Method that returns a Seq of [[A]] objects that the macro was able to find.
