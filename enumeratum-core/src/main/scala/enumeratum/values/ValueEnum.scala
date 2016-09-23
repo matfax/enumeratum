@@ -4,12 +4,12 @@ import enumeratum.{ EnumMacros, ValueEnumMacros }
 
 import scala.language.experimental.macros
 
-trait ValueEnum[ValueType, EntryType <: ValueEnumEntry[ValueType]] {
+trait ValueEnum[V, E <: ValueEnumEntry[V]] {
 
   /**
-   * Map of [[ValueType]] to [[EntryType]] members
+   * Map of [[V]] to [[E]] members
    */
-  final lazy val valuesToEntriesMap: Map[ValueType, EntryType] = values.map(v => v.value -> v).toMap
+  final lazy val valuesToEntriesMap: Map[V, E] = values.map(v => v.value -> v).toMap
 
   /**
    * The sequence of values for your [[Enum]]. You will typically want
@@ -19,25 +19,25 @@ trait ValueEnum[ValueType, EntryType <: ValueEnumEntry[ValueType]] {
    * Feel free to implement this however you'd like (including messing around with ordering, etc) if that
    * fits your needs better.
    */
-  def values: Seq[EntryType]
+  def values: Seq[E]
 
   /**
-   * Tries to get an [[EntryType]] by the supplied value. The value corresponds to the .value
-   * of the case objects implementing [[EntryType]]
+   * Tries to get an [[E]] by the supplied value. The value corresponds to the .value
+   * of the case objects implementing [[E]]
    *
    * Like [[Enumeration]]'s `withValue`, this method will throw if the value does not match any of the values'
    * `.value` values.
    */
-  def withValue(i: ValueType): EntryType = withValueOpt(i).getOrElse(throw new NoSuchElementException(buildNotFoundMessage(i)))
+  def withValue(i: V): E = withValueOpt(i).getOrElse(throw new NoSuchElementException(buildNotFoundMessage(i)))
 
   /**
-   * Optionally returns an [[EntryType]] for a given value.
+   * Optionally returns an [[E]] for a given value.
    */
-  def withValueOpt(i: ValueType): Option[EntryType] = valuesToEntriesMap.get(i)
+  def withValueOpt(i: V): Option[E] = valuesToEntriesMap.get(i)
 
   private lazy val existingEntriesString = values.map(_.value).mkString(", ")
 
-  private def buildNotFoundMessage(i: ValueType): String = {
+  private def buildNotFoundMessage(i: V): String = {
     s"$i is not a member of ValueEnum ($existingEntriesString)"
   }
 

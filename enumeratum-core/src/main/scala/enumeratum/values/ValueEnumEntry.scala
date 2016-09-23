@@ -6,12 +6,12 @@ package enumeratum.values
  * Copyright 2016
  */
 
-trait ValueEnumEntry[ValueType] {
+trait ValueEnumEntry[+V] {
 
   /**
    * Value of this entry
    */
-  def value: ValueType
+  def value: V
 
 }
 
